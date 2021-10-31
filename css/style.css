@@ -1,0 +1,42 @@
+/* Navbar */
+
+.navbar {
+    height: 56px;
+    padding: 0px 48px!important;
+    justify-content: space-between!important;
+}
+
+.container-fluid {
+    width: fit-content!important;
+    height: 100%;
+    margin: 0!important;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.navbar-nav {
+    height: 100%;
+    flex-direction: row!important;
+}
+
+.nav-item {
+    height: 100%;
+}
+
+.nav-link {
+    height: 100%;
+    display: flex!important;
+    align-items: center;
+    color: white!important;
+    font-size: small;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.nav-link:hover {
+    background-color: cornflowerblue;
+}
+
+/* Fim Navbar */
