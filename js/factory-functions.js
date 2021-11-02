@@ -1,7 +1,8 @@
 export function factoryProperty(element) {
-    const { listing, link } = element
+    const { listing, link, medias } = element
     const { address, amenities, pricingInfos } = listing
     const { name } = link
+    const { url } = medias[0]
     const { price, monthlyCondoFee } = pricingInfos[0]
 
     const createPriceTemplateString = price => {
@@ -178,6 +179,7 @@ export function factoryProperty(element) {
         amenities: translateFeatures(amenities),
         propertyStructure: createPropertyStructureTemplateString(listing),
         price: createPriceTemplateString(price),
-        monthlyCondoFee: createCondoPriceTemplateString(monthlyCondoFee)
+        monthlyCondoFee: createCondoPriceTemplateString(monthlyCondoFee),
+        url
     }
 }

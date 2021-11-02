@@ -252,6 +252,7 @@ fieldset input:focus {
   color: black;
   display: flex;
   height: 100%;
+  align-items: flex-end;
   margin-left: 10px;
   text-transform: none;
 }
@@ -391,27 +392,170 @@ div.main {
   flex-wrap: nowrap;
 }
 
+div.summary-title {
+  font-size: 20px;
+  margin-top: 30px;
+}
+
+div.summary-filter {
+  padding: 10px 0;
+}
+
+span.filter {
+  padding: 8px 25px 8px 15px;
+  color: cornflowerblue;
+  border: 1px solid cornflowerblue;
+  font-size: small;
+  border-radius: 30px;
+}
+
+span.filter:hover {
+  background-color: rgb(245, 238, 238);
+}
+
+span.state-filter {
+  position: relative;
+}
+
+span.state-filter::after {
+  border-radius: 50%;
+  content: "x";
+  display: inline-block;
+  font-size: 12px;
+  height: 14px;
+  line-height: 11px;
+  padding: 0px;
+  position: absolute;
+  text-align: center;
+  left: 18px;
+  top: 1px;
+  width: 14px;
+  font-weight: bold;
+}
+
 div.card {
   display: flex;
+  flex-direction: row;
+  border-radius: 5px;
+  border: 1px solid rgb(230, 234, 243);
+  margin-top: 20px;
 }
 
 div.img {
-  flex-grow: 1;
-  width: 100%;
-  background-color: #755d31;
+  width: 360px;
+  height: 240px;
+}
+
+img.property-img {
+  width: inherit;
+  height: inherit;
 }
 
 div.information {
-  flex-grow: 2;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px;
+}
+
+div.address {
+  color: gray;
+  font-size: small;
+}
+
+div.title {
+  font-size: 20px;
+}
+
+div.property-structure {
+  font-size: small;
+  padding: 10px 0;
+}
+
+div.property-structure p {
+  margin: 0;
+}
+
+div.footer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  height: 100%;
+}
+
+div.prices {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+div.price {
+  font-weight: bold;
+  font-size: 20px;
   width: 100%;
 }
 
-span.particular {
+div.condo-price {
+  font-size: small;
+  width: 100%;
+}
+
+div.condo-price p {
+  margin: 0;
+}
+
+div.actions {
+  display: flex;
+  justify-content: end;
+  align-items: flex-end;
+  flex-grow: 2;
+}
+
+button.phone-btn,
+button.message-btn {
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: transparent;
+  color: orangered;
+  display: none;
+}
+
+button.phone-btn:hover,
+button.message-btn:hover {
+  background-color: orangered;
+  color: white;
+}
+
+span.feature {
   background-color: rgb(226, 226, 238);
   border-radius: 20px;
   font-size: small;
-  color: rgb(160, 156, 156);
-  padding: 3px 5px;
+  color: rgb(150, 144, 144);
+  margin-right: 10px;
+  padding: 3px 6px;
+}
+
+div.error {
+  padding: 40px;
+  display: none;
+}
+
+div.error p {
+  color: black;
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+div.error p:nth-child(3) {
+  color: red;
+  font-size: xx-large;
+  font-weight: normal;
+  padding: 20px;
+  text-transform: lowercase;
 }
 
 /* End Results */

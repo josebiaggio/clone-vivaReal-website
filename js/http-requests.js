@@ -4,7 +4,7 @@ export const get = async ({ city, state }) => {
     const cityWithoutBlankSpaces = cityInLowerCase.replace(' ', '-').replace(' ', '-')
     const stateInLowerCase = state.toLowerCase()
     const url = `https://private-9e061d-piweb.apiary-mock.com/venda?state=${stateInLowerCase}&city=${cityWithoutBlankSpaces}`
-    const response = fetch(url).then(data => data.json())
-    const data = await Promise.resolve(response)
+    const response = await fetch(url).then(response => response.json())
+    const data = Promise.resolve(response)
     return data
 }
