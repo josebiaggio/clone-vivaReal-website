@@ -1,4 +1,6 @@
-import { set, check, change, hide } from './event-listeners.js'
+import { set, check, update, hide } from './event-listeners.js'
+import { get } from './http-requests.js'
+import { factoryProperty } from './factory-functions.js'
 
 const setTheBorderBottomColorWhenOnClick = () => {
     const targets = document.querySelectorAll('.results-wrapper button.btn')
@@ -10,9 +12,9 @@ const checkIfLocationIsValid = () => {
     check(target)
 }
 
-const changeDropdownStyle = () => {
+const updateDropdownStyle = () => {
     const target = document.querySelector('#property-location')
-    change(target)
+    update(target)
 }
 
 const hideLocationFilter = () => {
@@ -20,63 +22,87 @@ const hideLocationFilter = () => {
     hide(target)
 }
 
-export const createCard = obj => {
-    const { result } = obj.search
+export const getCityAndState = ({ city, state }) => {
+    getData({ city, state })
+}
+
+const getData = async ({ city, state }) => {
+    const data = await get({ city, state })
+    createCards(data)
+}
+
+const createCards = data => {
+    const { search } = data
+    const { result } = search
     const { listings } = result
-    const { listing, link } = listings[0]
-    const { address, amenities, bathrooms, bedrooms, parkingSpaces, pricingInfos, usableAreas } = listing
-    const { price } = pricingInfos
-    const { name } = link
 
-    console.log(listings[0])
-    const main = document.querySelector('.results-wrapper div.main')
-    const card = document.createElement('div')
-    card.className = 'card'
-    main.append(card)
-    const imgWrapper = document.createElement('div')
-    imgWrapper.className = 'img'
-    card.append(imgWrapper)
-    const informationWrapper = document.createElement('div')
-    informationWrapper.className = 'information'
-    card.append(informationWrapper)
-
-    const addressWrapper = document.createElement('div')
-    addressWrapper.className = 'address'
-    informationWrapper.append(addressWrapper)
-    const { city, neighborhood, stateAcronym, street, streetNumber } = address
-    addressWrapper.innerText = `${street}, ${streetNumber} - ${neighborhood}, ${city} - ${stateAcronym}`
-
-    const titleWrapper = document.createElement('div')
-    titleWrapper.className = 'title'
-    informationWrapper.append(titleWrapper)
-    titleWrapper.innerText = name
-
-    const propertyStructureWrapper = document.createElement('div')
-    propertyStructureWrapper.className = 'property-structure'
-    informationWrapper.append(propertyStructureWrapper)
-    propertyStructureWrapper.innerText = `${usableAreas[0]} m² ${bedrooms[0]} Quartos ${bathrooms[0]} Banheiros ${parkingSpaces[0]} Vagas`
-
-    const particulars = document.createElement('div')
-    particulars.className = 'particulars'
-    informationWrapper.append(particulars)
-
-    amenities.forEach(element => {
-        const particular = document.createElement('span')
-        particular.className = 'particular'
-        particulars.append(particular)
-        particular.innerText = element
-    })
-
-    const priceWrapper = document.createElement('div')
-    priceWrapper.className = 'price'
-    informationWrapper.append(priceWrapper)
+    listings.forEach(element => {
+        const { name, address, amenities, propertyStructure, price, monthlyCondoFee } = factoryProperty(element)
+        const main = document.querySelector('.results-wrapper div.main')
+        
+        // Card
+        const card = document.createElement('div')
+        card.className = 'card'
+        main.append(card)
+        
+        // Img
+        const imgWrapper = document.createElement('div')
+        imgWrapper.className = 'img'
+        card.append(imgWrapper)
+        
+        // Information
+        const informationWrapper = document.createElement('div')
+        informationWrapper.className = 'information'
+        card.append(informationWrapper)
     
+        // Address
+        const addressWrapper = document.createElement('div')
+        addressWrapper.className = 'address'
+        informationWrapper.append(addressWrapper)
+        addressWrapper.innerText = address
+    
+        // Title
+        const titleWrapper = document.createElement('div')
+        titleWrapper.className = 'title'
+        informationWrapper.append(titleWrapper)
+        titleWrapper.innerText = name
+    
+        // Property Structure
+        const propertyStructureWrapper = document.createElement('div')
+        propertyStructureWrapper.className = 'property-structure'
+        informationWrapper.append(propertyStructureWrapper)
+        propertyStructureWrapper.innerHTML = `<p>${propertyStructure}</p>`
+    
+        // Features
+        const features = document.createElement('div')
+        features.className = 'features'
+        informationWrapper.append(features)
+    
+        amenities.forEach(element => {
+            const feature = document.createElement('span')
+            feature.className = 'feature'
+            features.append(feature)
+            feature.innerText = element
+        })
+    
+        // Price
+        const priceWrapper = document.createElement('div')
+        priceWrapper.className = 'price'
+        informationWrapper.append(priceWrapper)
+        priceWrapper.innerText = price
+    
+        // Condo price
+        const condoPriceWrapper = document.createElement('div')
+        condoPriceWrapper.className = 'condo-price'
+        informationWrapper.append(condoPriceWrapper)
+        condoPriceWrapper.innerHTML = `<p>${monthlyCondoFee}</p>`
+    })
 }
 
 const main = () => {
     setTheBorderBottomColorWhenOnClick()
     checkIfLocationIsValid()
-    changeDropdownStyle()
+    updateDropdownStyle()
     hideLocationFilter()
 }
 

@@ -1,4 +1,4 @@
-import { get } from './http-requests.js'
+import { getCityAndState } from './index.js'
 
 const set = targets => {
     targets.forEach((element, index, array) => {
@@ -19,7 +19,7 @@ const check = target => {
         const possibleValuesForSP = ['SÃO PAULO', 'SAO PAULO', 'SP']
         const possibleValuesForRJ = ['RIO DE JANEIRO', 'RJ']
         let locationIsValid = null
-
+    
         const dictionary = [
             { location: 'São Paulo', uf: 'SP' },
             { location: 'Rio de Janeiro', uf: 'RJ' }
@@ -39,7 +39,7 @@ const check = target => {
                     document.querySelector('.location-item').style.display = 'flex'
                     document.querySelector('.location-name').textContent = `${location} - `
                     document.querySelector('.location-uf').textContent = uf
-                    get({ city: location, state: uf })
+                    getCityAndState({ city: location, state: uf })
                 }
             })
         } else {
@@ -50,7 +50,7 @@ const check = target => {
     })
 }
 
-const change = target => {
+const update = target => {
     target.addEventListener('blur', function () {
         const display = document.querySelector('.location-item').style.display
         if(display === 'flex') {
@@ -71,4 +71,4 @@ const hide = target => {
     })
 }
 
-export { set, check, change, hide }
+export { set, check, update, hide }

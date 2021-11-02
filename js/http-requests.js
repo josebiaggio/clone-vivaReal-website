@@ -1,5 +1,3 @@
-import { createCard } from './index.js'
-
 export const get = async ({ city, state }) => {
     const cityWithoutAccent = city.normalize('NFD').replace(/[\u0300-\u036f]/g, "")
     const cityInLowerCase = cityWithoutAccent.toLowerCase()
@@ -8,5 +6,5 @@ export const get = async ({ city, state }) => {
     const url = `https://private-9e061d-piweb.apiary-mock.com/venda?state=${stateInLowerCase}&city=${cityWithoutBlankSpaces}`
     const response = fetch(url).then(data => data.json())
     const data = await Promise.resolve(response)
-    createCard(data)
+    return data
 }
