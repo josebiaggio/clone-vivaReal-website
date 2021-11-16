@@ -3,7 +3,9 @@
 
 # About project
 
-https://p4utx.csb.app/
+Codesandbox: https://codesandbox.io/s/github/josebiaggio/clone-vivaReal-website
+
+Site: https://nu91k.csb.app/
 
 Recreation of the interface Viva Real property sale and rental website. The page created has static content and dynamic content. The static part is responsible for displaying all the navigation and filters part. And the dynamic part is responsible for displaying the data provided by an API. This was the final project made in module 4 of the **Santander Coders 2021** program.
 
